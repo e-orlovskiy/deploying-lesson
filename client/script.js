@@ -3,6 +3,8 @@ const req2 = document.querySelector('.req2POST')
 const req3 = document.querySelector('.req3DEL')
 const req4 = document.querySelector('.req4PATCH')
 
+const PREFIX = 'https://deploying-lesson-server.onrender.com'
+
 //! GET
 const getData = url => {
 	return new Promise((resolve, reject) =>
@@ -60,7 +62,7 @@ const patchData = (url, updatedData) => {
 
 req1.addEventListener('click', async () => {
 	try {
-		const users = await getData('http://localhost:3002/getUsers')
+		const users = await getData(`${PREFIX}/getUsers`)
 		console.log(users)
 	} catch (err) {
 		console.error('Произошла ошибка при получении пользователей', err)
@@ -79,7 +81,7 @@ req2.addEventListener('click', async () => {
 			password
 		}
 		console.log(user)
-		let info = await postData('http://localhost:3002/addUser', user)
+		let info = await postData(`${PREFIX}/addUser`, user)
 		console.log(info)
 	} catch (err) {
 		console.error('Произошла ошибка при добавлении нового пользователя', err)
@@ -89,7 +91,7 @@ req2.addEventListener('click', async () => {
 req3.addEventListener('click', async () => {
 	try {
 		let id = '59b99db4cfa9a34dcd7885b7'
-		let info = await deleteData(`http://localhost:3002/deleteUser/${id}`)
+		let info = await deleteData(`${PREFIX}/deleteUser/${id}`)
 		console.log(info)
 	} catch (err) {
 		console.error('Произошла ошибка при удалении пользователя', err)
@@ -108,7 +110,7 @@ req4.addEventListener('click', async () => {
 			newPassword
 		}
 
-		let info = await patchData(`http://localhost:3002/editUser/${name}`, user)
+		let info = await patchData(`${PREFIX}/editUser/${name}`, user)
 		console.log(info)
 	} catch (err) {
 		console.error('Произошла ошибка при редактировании пользователя', err)
